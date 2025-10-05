@@ -3,7 +3,7 @@
 ## 🚀 Overview
 DokimionTech.Cloud is part of the **Digital Doki / Dokimion Solutions** ecosystem — offering rotating cloud-based access to premium creative and productivity tools such as Adobe Creative Cloud and Microsoft 365 through an AI-automated platform.
 
-The system provides short-term license rentals via secured virtual environments (Remote Desktop Services or browser-based containers) to allow verified users to access powerful software without the traditional cost barrier.
+The system provides short-term access via secured virtual environments (Remote Desktop Services or browser-based containers) to allow verified users to access powerful software without the traditional cost barrier.
 
 ---
 
@@ -67,3 +67,4 @@ For full disclosure and vulnerability reporting, see `/.well-known/security.txt`
 ## 📄 License
 All web content, brand assets, and automation scripts © Digital Doki / Dokimion Solutions, 2025.
 Open-source libraries within this repo are governed by their respective licenses (MIT, Apache-2.0, BSD-3-Clause, etc.).
+ Under Construction — Pending Adobe & Microsoft Partnership Approval and Funding | © DigitalDokimion Cloud 2025
