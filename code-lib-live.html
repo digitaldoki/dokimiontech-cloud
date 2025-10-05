@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Code-Lib Live · Lovey Llama</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Make your Lovey Llama Ad-Lib come alive with an animated story and narration." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0b1020; --card:#121a33; --ink:#e6ecff; --muted:#a9b3d9;
+      --brand:#8ef0d5; --accent:#ffd266; --danger:#ff6b6b; --ok:#8ae39c;
+      --focus:#6ab8ff;
+    }
+    [data-theme="light"]{
+      --bg:#f8faff; --card:#ffffff; --ink:#0b1020; --muted:#536090;
+      --brand:#15b39b; --accent:#a26b00;
+    }
+    * { box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:linear-gradient(180deg, var(--bg), #000000);
+      color:var(--ink);
+    }
+    .wrap{ max-width:1000px; margin:0 auto; padding:24px; }
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:20px;
+    }
+    .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink); }
+    .logo{
+      width:44px; height:44px; border-radius:10px; background: radial-gradient(circle at 30% 30%, var(--brand), transparent 60%), radial-gradient(circle at 70% 70%, var(--accent), transparent 60%), #1a244d;
+      display:grid; place-items:center; font-weight:800; letter-spacing:0.5px;
+      box-shadow:0 6px 24px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+    h1{ font-size:clamp(1.2rem, 2.3vw + .8rem, 2rem); margin:0; line-height:1.2; }
+    .tag{ font-size:.9rem; color:var(--muted); margin-top:4px; }
+    .controls{ display:flex; gap:8px; align-items:center; }
+    button, .btn{
+      appearance:none; background:var(--brand); color:#04231e; border:none;
+      padding:10px 14px; border-radius:12px; font-weight:700; cursor:pointer;
+      transition: transform .06s ease, opacity .2s ease, box-shadow .2s ease;
+      box-shadow:0 8px 24px rgba(0,0,0,.25);
+    }
+    button:hover{ transform:translateY(-1px); }
+    button:active{ transform:translateY(1px); }
+    .btn-ghost{ background:transparent; color:var(--ink); border:1px solid rgba(255,255,255,.15); }
+    main{
+      display:grid; grid-template-columns:1fr; gap:20px;
+    }
+    @media (min-width: 900px){
+      main{ grid-template-columns: 1.1fr .9fr; }
+    }
+    .card{
+      background:linear-gradient(180deg, var(--card), rgba(255,255,255,.02));
+      border-radius:18px; padding:20px; border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+    .card h2{ margin-top:0; font-size:1.1rem; letter-spacing:.3px; }
+    .grid{ display:grid; gap:12px; grid-template-columns:1fr; }
+    @media (min-width: 680px){
+      .grid.two{ grid-template-columns:1fr 1fr; }
+      .grid.three{ grid-template-columns:repeat(3, 1fr); }
+    }
+    label{ display:block; font-size:.9rem; color:var(--muted); margin-bottom:6px; }
+    input[type="text"], select, textarea{
+      width:100%; padding:12px 12px; border-radius:12px; background:#0c1430; color:var(--ink);
+      border:1px solid rgba(255,255,255,.12); outline:none;
+    }
+    [data-theme="light"] input[type="text"], [data-theme="light"] select, [data-theme="light"] textarea{
+      background:#f3f6ff; color:#0b1020; border-color:#d8e1ff;
+    }
+    input:focus, select:focus, textarea:focus{ box-shadow:0 0 0 3px rgba(106,184,255,.35); border-color:var(--focus); }
+    .helper{ font-size:.8rem; color:var(--muted); margin-top:6px; }
+    .consent{ font-size:.9rem; }
+    .consent input{ transform:translateY(1px); }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+    .muted{ color:var(--muted); }
+    .previewBox{
+      border-radius:14px; overflow:hidden; border:1px dashed rgba(255,255,255,.2); min-height:180px;
+      display:grid; place-items:center; position:relative; isolation:isolate;
+      background:
+        radial-gradient(60% 60% at 20% 30%, rgba(142,240,213,.08), transparent),
+        radial-gradient(60% 60% at 80% 70%, rgba(255,210,102,.08), transparent);
+    }
+    .previewArt{
+      font-size:60px; filter: drop-shadow(0 6px 16px rgba(0,0,0,.35));
+      animation: float 4s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce){
+      .previewArt{ animation:none; }
+    }
+    @keyframes float{ 0%{ transform:translateY(0) } 50%{ transform:translateY(-6px) } 100%{ transform:translateY(0) } }
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .pill{ display:inline-flex; align-items:center; gap:6px; font-size:.78rem; color:#0b1020; background:var(--brand); padding:6px 10px; border-radius:999px; font-weight:700; }
+    .pill.mellow{ background:#c9d7ff; }
+    .success{ color:var(--ok); }
+    .error{ color:var(--danger); }
+    footer{ margin-top:20px; font-size:.85rem; color:var(--muted); }
+    .captionBox{
+      background:rgba(0,0,0,.3); border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:10px; font-size:.95rem;
+    }
+    .toggleRow{ display:flex; gap:8px; align-items:center; }
+  </style>
+</head>
+<body data-theme="dark">
+  <a class="sr-only" href="#main">Skip to main content</a>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/" aria-label="Go to Dokimion Tech home">
+        <div class="logo" aria-hidden="true">DL</div>
+        <div>
+          <h1>Code-Lib Live <span class="pill">Lovey Llama</span></h1>
+          <div class="tag">Turn your Ad-Libs into a narrated mini-movie</div>
+        </div>
+      </a>
+      <div class="controls">
+        <div class="toggleRow">
+          <input id="themeToggle" type="checkbox" aria-label="Toggle light theme" />
+          <label for="themeToggle" class="muted">Light mode</label>
+        </div>
+        <a class="btn btn-ghost" href="https://dokimion.tech" target="_blank" rel="noopener">dokimion.tech</a>
+      </div>
+    </header>
+
+    <main id="main" role="main" aria-labelledby="formTitle">
+      <!-- LEFT: FORM -->
+      <section class="card" aria-describedby="formHelp">
+        <h2 id="formTitle">Fill your Ad-Libs</h2>
+        <p id="formHelp" class="helper">No last names; a parent/teacher must consent before generation. We don’t sell personal data.</p>
+
+        <form id="libForm" novalidate>
+          <div class="grid two">
+            <div>
+              <label for="nickname">Your nickname</label>
+              <input id="nickname" name="nickname" type="text" maxlength="20" placeholder="e.g., Karli" required aria-required="true" />
+              <div class="helper">Will be spoken in the story.</div>
+            </div>
+
+            <div>
+              <label for="emotion">An emotion</label>
+              <input id="emotion" name="emotion" type="text" maxlength="18" placeholder="excited, curious, brave…" required />
+            </div>
+          </div>
+
+          <div class="grid three">
+            <div>
+              <label for="verb">A learning verb</label>
+              <input id="verb" name="verb" type="text" maxlength="18" placeholder="debug, explore, tinker…" required />
+            </div>
+            <div>
+              <label for="adjective">An adjective</label>
+              <input id="adjective" name="adjective" type="text" maxlength="18" placeholder="sparkly, clever, cozy…" required />
+            </div>
+            <div>
+              <label for="sidekick">Sidekick animal</label>
+              <input id="sidekick" name="sidekick" type="text" maxlength="18" placeholder="otter, fox, turtle…" required />
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div>
+              <label for="hobby">Favorite hobby</label>
+              <input id="hobby" name="hobby" type="text" maxlength="24" placeholder="drawing, dancing, chess…" required />
+            </div>
+            <div>
+              <label for="snack">Favorite snack</label>
+              <input id="snack" name="snack" type="text" maxlength="24" placeholder="cupcakes, mango slices…" required />
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div>
+              <label for="tone">Story tone</label>
+              <select id="tone" name="tone">
+                <option value="gentle">Gentle & Encouraging</option>
+                <option value="adventure">Adventurous & Upbeat</option>
+                <option value="funny">Silly & Funny</option>
+              </select>
+            </div>
+            <div>
+              <label for="voice">Narrator voice</label>
+              <select id="voice" name="voice">
+                <option value="lovey">Lovey (kid-friendly)</option>
+                <option value="narrator">Calm Narrator</option>
+                <option value="teacher">Coach/Teacher</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid">
+            <div class="consent">
+              <label>
+                <input id="consent" type="checkbox" required />
+                I am a parent/guardian or teacher and I consent to generate this story. We permit anonymized processing. (<a href="#privacy" class="muted">Privacy</a>)
+              </label>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" id="generateBtn" aria-label="Generate story preview">Generate Preview</button>
+            <button type="button" id="clearBtn" class="btn-ghost">Clear</button>
+            <span id="status" role="status" aria-live="polite" class="muted"></span>
+          </div>
+        </form>
+      </section>
+
+      <!-- RIGHT: PREVIEW -->
+      <section class="card" aria-labelledby="previewTitle">
+        <h2 id="previewTitle">Your Live Preview</h2>
+        <div class="previewBox" id="previewBox" aria-live="polite">
+          <div class="previewArt" aria-hidden="true">🦙✨</div>
+        </div>
+
+        <div id="storyOut" class="helper" style="margin-top:12px;"></div>
+
+        <div class="actions" style="margin-top:12px;">
+          <button type="button" id="sendBtn" class="btn" disabled title="Generate full video & voiceover via AI backend">
+            Send to AI Studio
+          </button>
+          <button type="button" class="btn-ghost" id="copyLinkBtn" disabled>Copy Share Link</button>
+          <span id="sendStatus" class="muted" role="status" aria-live="polite"></span>
+        </div>
+
+        <div class="captionBox" id="captions" style="margin-top:12px;" aria-label="Narration captions" hidden></div>
+      </section>
+    </main>
+
+    <footer id="privacy" class="card" aria-labelledby="privacyTitle">
+      <h2 id="privacyTitle">Privacy & Accessibility</h2>
+      <ul>
+        <li>We only collect the words you enter (no last names). A parent/teacher must consent.</li>
+        <li>Stories may be processed by AI to generate narration/animation. We store an anonymized hash and age range for quality & safety.</li>
+        <li>ADA support: captions, reduced motion, high contrast, keyboard-only navigation. Email <a href="mailto:contact@dokimion.tech">contact@dokimion.tech</a> for accommodations.</li>
+      </ul>
+      <div class="muted">© Dokimion Tech · Educational use only · Do not upload personal/sensitive data.</div>
+    </footer>
+  </div>
+
+  <script>
+    // --- THEME TOGGLE ---
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('change', () => {
+      document.body.setAttribute('data-theme', themeToggle.checked ? 'light' : 'dark');
+    });
+
+    // --- FORM HANDLERS ---
+    const form = document.getElementById('libForm');
+    const statusEl = document.getElementById('status');
+    const storyOut = document.getElementById('storyOut');
+    const previewBox = document.getElementById('previewBox');
+    const captions = document.getElementById('captions');
+    const sendBtn = document.getElementById('sendBtn');
+    const copyLinkBtn = document.getElementById('copyLinkBtn');
+
+    const fields = ["nickname","emotion","verb","adjective","sidekick","hobby","snack","tone","voice"];
+
+    function getFormData(){
+      const data = {};
+      for (const id of fields){
+        const el = document.getElementById(id);
+        data[id] = (el?.value || "").trim();
+      }
+      data.consent = document.getElementById('consent').checked;
+      // Very light profanity guard (client-side); do real filtering server-side.
+      const banned = ["http","@", "<", "script"];
+      data._safe = !banned.some(b => Object.values(data).join(" ").toLowerCase().includes(b));
+      return data;
+    }
+
+    function makeStory(d){
+      // You can swap this with a templating + GPT safety layer on the backend.
+      const tones = {
+        gentle: "in a gentle, encouraging voice,",
+        adventure: "with a brave, adventurous beat,",
+        funny: "with silly giggles and playful rhymes,"
+      };
+      const narrationStyle = {
+        lovey: "Lovey whispers,",
+        narrator: "The narrator says,",
+        teacher: "Coach says,"
+      };
+      return `
+<strong>${d.nickname}</strong> and Lovey the Llama felt <strong>${d.emotion}</strong> when their game got glitchy.
+But libraries hold secret superpowers! With a cozy snack of <strong>${d.snack}</strong> and a quick stretch from their favorite hobby, <strong>${d.hobby}</strong>,
+they opened a book of code and learned to <strong>${d.verb}</strong> like a <strong>${d.adjective}</strong> pro.
+Their friend, a ${d.sidekick} sidekick, cheered them on.
+<br><br>
+${narrationStyle[d.voice]} ${tones[d.tone]} “When we learn, we’re coding our brains!
+Every try writes a new line. Mistakes are just clues.”
+<br><br>
+Tap, tap, click — the screen flickered… HOORAY! The world rebuilt itself:
+cozy houses, funny families, and new adventures. From that day,
+Lovey became a Super Llama Coder, and ${d.nickname} knew that every day is a chance to debug,
+learn, and rise more.`;
+    }
+
+    function updatePreview(){
+      const d = getFormData();
+      if(!d._safe){ statusEl.textContent = "Please remove links/special characters."; return; }
+      statusEl.textContent = "Preview ready.";
+      const storyHtml = makeStory(d);
+      storyOut.innerHTML = storyHtml;
+      captions.hidden = false;
+      captions.textContent = storyOut.textContent; // basic captions mirror (for demo)
+      sendBtn.disabled = !d.consent;
+      copyLinkBtn.disabled = true;
+    }
+
+    form.addEventListener('input', () => {
+      // Live preview as they type
+      if ([...form.querySelectorAll('input, select')].every(el => el.value)) {
+        updatePreview();
+      }
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const d = getFormData();
+      if(!d.consent){
+        statusEl.textContent = "Consent required.";
+        return;
+      }
+      if(!d._safe){
+        statusEl.textContent = "Please remove links/special characters.";
+        return;
+      }
+      updatePreview();
+      statusEl.innerHTML = '<span class="success">Preview generated ✔</span>';
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', ()=>{
+      form.reset();
+      storyOut.textContent = '';
+      captions.hidden = true;
+      captions.textContent = '';
+      statusEl.textContent = "Cleared.";
+      sendBtn.disabled = true;
+      copyLinkBtn.disabled = true;
+    });
+
+    // --- BACKEND: ZAPIER / AI STUDIO WEBHOOK ---
+    // Replace ZAPIER_WEBHOOK_URL with your Zapier Catch Hook URL.
+    const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/XXXXX/XXXXX"; // TODO set real URL
+    async function sendToBackend(){
+      const d = getFormData();
+      if(!d.consent){ return; }
+      const payload = {
+        project:"lovey-llama-code-lib",
+        inputs: d,
+        // Server should: (1) safety-check text, (2) call GPT to polish script,
+        // (3) call TTS (e.g., ElevenLabs/OpenAI) for narration,
+        // (4) call video/animation service (Pika/Runway/Kaiber),
+        // (5) return a shareable URL and caption file (WebVTT/SRT).
+      };
+      const sendStatus = document.getElementById('sendStatus');
+      sendStatus.textContent = "Sending to AI Studio…";
+      try{
+        // DEMO: comment out fetch if no backend yet.
+        // const res = await fetch(ZAPIER_WEBHOOK_URL, {
+        //   method:"POST",
+        //   headers:{ "Content-Type":"application/json" },
+        //   body: JSON.stringify(payload)
+        // });
+        // const data = await res.json();
+
+        // Mock response for demo:
+        await new Promise(r=>setTimeout(r, 700));
+        const data = {
+          ok:true,
+          shareUrl:"https://dokimion.tech/code-lib/live/example/ABC123",
+          captions:"WEBVTT\n\n00:00.000 --> 00:03.000\nLovey felt excited!\n"
+        };
+
+        if(data.ok){
+          sendStatus.innerHTML = '<span class="success">Submitted! Your video will be ready soon.</span>';
+          copyLinkBtn.disabled = false;
+          copyLinkBtn.dataset.link = data.shareUrl;
+          captions.hidden = false;
+          // Show returned captions if present
+          if (data.captions) captions.textContent = data.captions;
+        } else {
+          sendStatus.innerHTML = '<span class="error">Something went wrong. Please try again.</span>';
+        }
+      }catch(err){
+        console.error(err);
+        sendStatus.innerHTML = '<span class="error">Network error. Try again.</span>';
+      }
+    }
+    sendBtn.addEventListener('click', sendToBackend);
+
+    copyLinkBtn.addEventListener('click', ()=>{
+      const link = copyLinkBtn.dataset.link || '';
+      if(!link){ return; }
+      navigator.clipboard.writeText(link).then(()=>{
+        document.getElementById('sendStatus').textContent = "Share link copied!";
+      });
+    });
+
+    // OPTIONAL: Generate a QR code for this page (for print books).
+    // You can preprint static QR codes that point to this URL; dynamic QR not required here.
+  </script>
+</body>
+</html>
