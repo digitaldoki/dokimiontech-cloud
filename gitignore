@@ -1,0 +1,31 @@
+# GitHub Pages & general web project ignore list
+
+# OS & editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.tmp
+*.bak
+
+# Node / build tools (if added later)
+node_modules/
+dist/
+build/
+
+# Python / server-side (future use)
+__pycache__/
+*.py[cod]
+venv/
+
+# Local environment & secrets
+.env
+*.key
+*.pem
+*.crt
+
+# Personal files
+*.zip
+*.rar
+*.7z
+*.tar

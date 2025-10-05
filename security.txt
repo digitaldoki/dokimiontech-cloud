@@ -1,0 +1,7 @@
+Contact: mailto:security@dokimiontech.cloud
+Preferred-Languages: en
+Canonical: https://dokimiontech.cloud/.well-known/security.txt
+Encryption: https://dokimiontech.cloud/pgp-key.txt
+Acknowledgments: https://dokimiontech.cloud/security/thanks.html
+Policy: https://dokimiontech.cloud/security/policy.html
+Expires: 2026-10-01T00:00:00Z
