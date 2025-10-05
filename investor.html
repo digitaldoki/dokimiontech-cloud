@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digital Doki / DokimionTech Cloud Labs — Investor One‑Pager</title>
+  <meta name="description" content="Investor & grant one‑pager for Digital Doki / DokimionTech Cloud Labs." />
+  <style>
+    :root{ --ink:#0b1020; --card:#121426; --muted:#9aa3b2; --text:#e6e9ef;
+           --pink:#ff2ea6; --blue:#4cc9ff; --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35); }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:
+      radial-gradient(1200px 800px at 80% -10%, rgba(76,201,255,.18), transparent),
+      radial-gradient(900px 600px at -10% 10%, rgba(255,46,166,.14), transparent),
+      linear-gradient(180deg, var(--ink) 0%, #0a0d1a 100%); color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1000px,92%);margin:0 auto;padding:2rem 0 3rem}
+    .badge{display:inline-flex;gap:.5rem;align-items:center;background:rgba(255,255,255,.06);
+           border:1px solid rgba(255,255,255,.08);padding:.35rem .7rem;border-radius:999px;color:#b6c1d5}
+    h1{font-size:clamp(2rem,4.6vw,3rem);line-height:1.08;margin:.6rem 0 1rem}
+    h2{margin:1.6rem 0 .6rem;font-size:1.25rem}
+    p{margin:.4rem 0 .8rem;color:#dbe0ea}
+    .muted{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+          border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); padding:1rem; box-shadow:var(--shadow)}
+    ul{margin:.2rem 0 .6rem;padding-left:1.2rem;color:#dbe0ea}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:.6rem}
+    .kpi{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:.9rem;text-align:center}
+    .kpi .v{font-size:1.4rem;font-weight:800}
+    .cta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.75rem 1.1rem;border-radius:14px;
+         font-weight:650;border:1px solid transparent;cursor:pointer;transition:.2s}
+    .btn-primary{background:linear-gradient(90deg,var(--pink),var(--blue));color:#0a0d1a}
+    .btn-ghost{background:transparent;color:#e6e9ef;border-color:rgba(255,255,255,.14)}
+    footer{color:#9aa3b2;margin-top:2rem;text-align:center}
+    @media (max-width:860px){ .grid{grid-template-columns:1fr} .kpis{grid-template-columns:1fr 1fr} }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="badge">Digital Doki • DokimionTech Cloud Labs</div>
+    <h1>Investor & Grant One‑Pager</h1>
+    <p class="muted">Creative Access as a Service — secure, browser‑based access to Adobe Creative Cloud and Microsoft 365 with AI‑guided onboarding and monthly passes.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Problem</h2>
+        <p>Millions of freelancers, students, and small teams need pro‑grade software for short projects but can’t justify full annual licenses or high‑spec hardware. Set‑up friction and cost slow delivery.</p>
+        <h2>Solution</h2>
+        <p>A turnkey cloud studio: licensed virtual workspaces running Adobe or Microsoft 365 in the browser, provisioned in minutes. No installs. AI automation handles onboarding, rotation, renewals, and support.</p>
+      </div>
+      <div class="card">
+        <h2>Market & Timing</h2>
+        <ul>
+          <li>Global creator / SMB productivity spend continues to grow with hybrid work.</li>
+          <li>Short‑term, hosted access lowers CAC and expands the top of funnel for premium tools.</li>
+          <li>AI onboarding + remote desktop maturity reduces support overhead.</li>
+        </ul>
+        <div class="kpis">
+          <div class="kpi"><div class="v">$25–$120</div><div class="l">Monthly passes</div></div>
+          <div class="kpi"><div class="v">60–70%</div><div class="l">Gross margin target</div></div>
+          <div class="kpi"><div class="v">100 ➜ 1,000</div><div class="l">Seat scale goal (12 mos)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:1rem">
+      <div class="card">
+        <h2>Business Model</h2>
+        <ul>
+          <li>Passes: Adobe Studio, 365 Suite, and Dual‑Access Pro bundles.</li>
+          <li>Upsells: storage, collaboration, premium AI assistance.</li>
+          <li>B2C → EDU / SMB labs → Enterprise pilots.</li>
+        </ul>
+        <h2>Traction</h2>
+        <ul>
+          <li>MVP live: <strong>dokimiontech.cloud</strong> (GitHub Pages).</li>
+          <li>Cross‑sell funnel: Adobe → Microsoft 365 upsell with automated emails.</li>
+          <li>Early pipeline for startup cloud credits to compress infra costs.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Go‑to‑Market</h2>
+        <ul>
+          <li>Creators & students: monthly passes via content & partnerships.</li>
+          <li>SMB teams & EDU labs: classroom / cohort bundles.</li>
+          <li>Affiliate & marketplace trials (Gumroad, AppSumo‑style promos).</li>
+        </ul>
+        <h2>Roadmap (6–12 months)</h2>
+        <ul>
+          <li>AI agent onboarding & support automation.</li>
+          <li>Usage‑based orchestration to optimize VM costs.</li>
+          <li>Admin console for labs (multi‑seat, billing, analytics).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:1rem">
+      <div class="card">
+        <h2>Team & Advisors</h2>
+        <p>Digital Doki founders with domain expertise in cloud, AI workflows, and creative operations. Advisors targeted from startup ecosystems and vendor partnerships.</p>
+        <h2>Legal & Compliance</h2>
+        <p>Hosted access model with strict adherence to vendor terms. Isolated VMs, encrypted storage, least‑privilege access, and a published security.txt policy.</p>
+      </div>
+      <div class="card">
+        <h2>Funding Ask</h2>
+        <p><strong>$25k–$50k</strong> pre‑seed to scale from 100 → 1,000 seats, finalize AI automation, and validate EDU/SMB bundles.</p>
+        <h2>Use of Funds</h2>
+        <ul>
+          <li>Licensing blocks (Adobe/Microsoft) & VM capacity</li>
+          <li>Automation stack (Zapier/Actions) & onboarding content</li>
+          <li>Pilot programs (EDU/SMB) & brand growth</li>
+        </ul>
+        <div class="cta">
+          <a class="btn btn-primary" href="mailto:founders@digitaldoki.com?subject=Investor%20Intro%20—%20DokimionTech%20Cloud">Invest / Partner</a>
+          <a class="btn btn-ghost" href="https://dokimiontech.cloud" target="_blank" rel="noopener">Visit Site</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>© 2025 Digital Doki / Dokimion Solutions — Investor One‑Pager</footer>
+  </div>
+</body>
+</html>
